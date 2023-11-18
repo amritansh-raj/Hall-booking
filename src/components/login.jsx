@@ -1,15 +1,25 @@
 import loginLogo from "../assets/login.png";
 import brandLogo from "../assets/brand.png";
 import axiosInstance from "../axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Home from "./home";
 
 export function Login() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const navigate = useNavigate();
 
+  const initialFormData = {
+    username: "",
+    password: "",
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
+
+  const resetForm = () => {
+    setFormData(initialFormData);
+    setErrors({});
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,20 +36,26 @@ export function Login() {
       return;
     }
 
+    resetForm();
+    navigate("/home");
     try {
-      const response = await axiosInstance.post("/login", formData);
+      const response = await axiosInstance.post("/login/token/", formData);
       console.log(response.data);
     } catch (error) {
       console.error(error);
     }
   };
 
+  useEffect(() => {
+    setErrors({});
+  }, [formData]);
+
   const validateForm = (data) => {
     let errors = {};
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-      errors.email = "Invalid email address";
-    }
+    // if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.username)) {
+    //   errors.username = "Invalid username address";
+    // }
 
     if (data.password.length < 8) {
       errors.password = "Password must be at least 8 characters long";
@@ -51,10 +67,15 @@ export function Login() {
   return (
     <>
       <div className="h-screen bg-[#1a1c20] flex justify-center">
-        <div className="container m-20 bg-[#e9e9e9] rounded-2xl flex flex-row">
+        <div className="container flex flex-row m-20 bg-[#e9e9e9] rounded-2xl">
           <div className="hidden lg:flex lg:flex-auto lg:w-64 lg:rounded-2xl lg:justify-center lg:items-center">
-            <img src={loginLogo} alt="not found" />
+            <img
+              src={loginLogo}
+              alt="not found"
+              className="w-full h-auto max-h-full"
+            />
           </div>
+
           <div className="flex-auto w-48 bg-white rounded-2xl m-4 flex flex-col">
             <div className="flex justify-center items-center m-2 h-2/5">
               <img
@@ -71,48 +92,65 @@ export function Login() {
               <p className="mb-6">Please enter your details</p>
             </div>
 
-            <div className="flex justify-center items-center m-2">
-              <form className="space-y-5 w-4/6" onSubmit={handleSubmit}>
+            <div className="flex justify-center items-center m-2 lg:w-full">
+              <form
+                className="space-y-5 w-full lg:w-4/6"
+                onSubmit={handleSubmit}
+              >
                 <div>
                   <label
-                    htmlFor="email"
-                    className="block text-sm font-medium leading-6 text-gray-900"
+                    htmlFor="username"
+                    className="block text-sm font-bold leading-6 text-gray-900"
                   >
-                    Email address
+                    Username
                   </label>
-                  <div className="mt-2">
+                  <div>
                     <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
+                      id="username"
+                      name="username"
+                      type="username"
+                      autoComplete="username"
                       required
-                      onChange={handleInputChange}
-                      className="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
+                      onChange={(event) => handleInputChange(event)}
+                      className={`block w-full rounded-md p-2 text-gray-900 shadow-sm ring-1 ring-inset ${
+                        errors.username ? "ring-red-500" : "ring-gray-300"
+                      } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6`}
                     />
                   </div>
+                  {errors.username && (
+                    <div className="text-red-500 text-xs">
+                      {errors.username}
+                    </div>
+                  )}
                 </div>
 
                 <div>
                   <div className="flex items-center justify-between">
                     <label
                       htmlFor="password"
-                      className="block text-sm font-medium leading-6 text-gray-900"
+                      className="block text-sm font-bold leading-6 text-gray-900"
                     >
                       Password
                     </label>
                   </div>
-                  <div className="mt-2">
+                  <div>
                     <input
                       id="password"
                       name="password"
                       type="password"
                       autoComplete="current-password"
                       required
-                      onChange={handleInputChange}
-                      className="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
+                      onChange={(event) => handleInputChange(event)}
+                      className={`block w-full rounded-md p-2 text-gray-900 shadow-sm ring-1 ring-inset ${
+                        errors.password ? "ring-red-500" : "ring-gray-300"
+                      } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6`}
                     />
                   </div>
+                  {errors.password && (
+                    <div className="text-red-500 text-xs">
+                      {errors.password}
+                    </div>
+                  )}
                 </div>
 
                 <div className="mt-3">

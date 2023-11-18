@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "",
+  baseURL: "http://10.21.81.147:8000/booking",
+  withCredentials: true,
 });
 
 instance.interceptors.request.use(
