@@ -1,9 +1,9 @@
 import loginLogo from "../assets/login.png";
 import brandLogo from "../assets/brand.png";
-import axiosInstance from "../axios";
+import axiosInstance from "../api/axios";
 import React, { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Home from "./home";
+import { setTokens } from "../storage/storage";
 
 export function Login() {
   const navigate = useNavigate();
@@ -41,6 +41,10 @@ export function Login() {
     try {
       const response = await axiosInstance.post("/login/token/", formData);
       console.log(response.data);
+
+      const access = response.data.access;
+      const refresh = response.data.refresh;
+      setTokens(access, refresh);
     } catch (error) {
       console.error(error);
     }
