@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import InputField from "../components/InputField";
+import axiosInstance from "../api/axios";
 
 const AddHall = () => {
   const initialInputValue = {
-    name: "",
+    hallname: "",
     price: "",
   };
 
@@ -14,23 +15,33 @@ const AddHall = () => {
     setInputValue({ ...inputValue, [name]: value });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(inputValue);
+
+    try {
+      const response = await axiosInstance.post("", inputValue);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <section>
+    <section className="">
       <form onSubmit={handleSubmit}>
         <InputField
-          type="text"
-          value={name}
-          placeholder="Product Name"
-          label="Name"
-          name="name"
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
           onChange={handleInputChange}
         />
         <InputField
-          type="number"
-          value={price}
-          placeholder="Add Price"
-          label="Price"
-          name="price"
+          type={"number"}
+          placeholder={"Add Price"}
+          label={"Price"}
+          name={"price"}
           onChange={handleInputChange}
         />
         <button type="submit"> ADD</button>

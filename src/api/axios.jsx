@@ -3,13 +3,13 @@ import { getRefreshToken, setTokens } from "../storage/storage";
 import { useNavigate } from "react-router-dom";
 
 
-const instance = axios.create({
+const axiosInstance = axios.create({
   baseURL: "http://10.21.84.196:8000/booking",
   headers: { "Content-Type": "application/json" },
   withCredentials: true,
 });
 
-instance.interceptors.request.use(
+axiosInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("accessToken");
     if (token) {
@@ -22,7 +22,7 @@ instance.interceptors.request.use(
   }
 );
 
-instance.interceptors.response.use(
+axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
@@ -32,7 +32,7 @@ instance.interceptors.response.use(
 
       try {
         const refreshToken = getRefreshToken();
-        const response = await instance.post("/refresh/", {
+        const response = await axiosInstance.post("/refresh/", {
           refresh: refreshToken,
         });
         console.log(response.data);
@@ -53,4 +53,4 @@ instance.interceptors.response.use(
   }
 );
 
-export default instance;
+export default axiosInstance;
