@@ -1,13 +1,10 @@
 import axios from "axios";
 import { getRefreshToken, setTokens } from "../storage/storage";
 import { useNavigate } from "react-router-dom";
+import { navigateToHome } from "../utils/navigateToHome";
+import { configureAxios } from "../utils/axiosConfig";
 
-
-const axiosInstance = axios.create({
-  baseURL: "http://10.21.84.196:8000/booking",
-  headers: { "Content-Type": "application/json" },
-  withCredentials: true,
-});
+const axiosInstance = axios.create(configureAxios());
 
 axiosInstance.interceptors.request.use(
   (config) => {
@@ -45,7 +42,7 @@ axiosInstance.interceptors.response.use(
         return axios(originalRequest);
       } catch (error) {
         console.log(error);
-        // navigate("/")
+        navigateToHome();
       }
     }
 

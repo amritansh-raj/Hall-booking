@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
-import {
-  clearTokens,
-  getAccessToken,
-  getRefreshToken,
-} from "../storage/storage";
+import { clearTokens, getRefreshToken } from "../storage/storage";
 import axiosInstance from "../api/axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   let Links = [
-    { name: "ADD HALL", link: "/" },
+    { name: "ADD HALL", link: "/home/addHall" },
     { name: "SERVICE", link: "/" },
     { name: "ABOUT", link: "/" },
     { name: "CONTACT", link: "/" },
@@ -34,21 +30,21 @@ const Header = () => {
     }
   };
 
-  useEffect(() => {
-    const getProfile = async () => {
-      try {
-        const response = await axiosInstance.get("/profile/");
-        console.log(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  // useEffect(() => {
+  //   const getProfile = async () => {
+  //     try {
+  //       const response = await axiosInstance.get("/profile/");
+  //       console.log(response.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
 
-    getProfile();
-  }, []);
+  //   getProfile();
+  // }, []);
 
   return (
-    <header className="shadow-md w-full fixed top-0 left-0">
+    <header className="shadow-md w-full top-0 left-0 z-10">
       <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
         <div className="font-bold text-2xl cursor-pointer flex items-center gap-1">
           {/* <BookOpenIcon className='w-7 h-7 text-blue-600'/> */}
@@ -67,15 +63,14 @@ const Header = () => {
             open ? "top-12" : "top-[-490px]"
           }`}
         >
-          {Links.map((link) => (
-            <li className="md:ml-8 md:my-0 my-7 font-semibold">
-              <a
-                href={link.link}
-                key={link.index}
+          {Links.map((link, index) => (
+            <li key={index} className="md:ml-8 md:my-0 my-7 font-semibold">
+              <Link
+                to={link.link}
                 className="text-gray-800 hover:text-blue-400 duration-500"
               >
                 {link.name}
-              </a>
+              </Link>
             </li>
           ))}
           <button

@@ -28,8 +28,260 @@ const AddHall = () => {
   };
 
   return (
-    <section className="">
+    <section>
       <form onSubmit={handleSubmit}>
+        <InputField
+          type={"number"}
+          placeholder={"Add Price"}
+          label={"Price"}
+          name={"price"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
+        <InputField
+          type={"text"}
+          placeholder={"Product Name"}
+          label={"Name"}
+          name={"hallname"}
+          onChange={handleInputChange}
+        />
         <InputField
           type={"text"}
           placeholder={"Product Name"}
