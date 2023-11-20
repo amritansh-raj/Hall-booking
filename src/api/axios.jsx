@@ -1,5 +1,7 @@
 import axios from "axios";
 import { getRefreshToken, setTokens } from "../storage/storage";
+import { useNavigate } from "react-router-dom";
+
 
 const instance = axios.create({
   baseURL: "http://10.21.84.196:8000/booking",
@@ -43,6 +45,7 @@ instance.interceptors.response.use(
         return axios(originalRequest);
       } catch (error) {
         console.log(error);
+        // navigate("/")
       }
     }
 

@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { getAccessToken } from "../storage/storage";
+import {
+  clearTokens,
+  getAccessToken,
+  getRefreshToken,
+} from "../storage/storage";
 import axiosInstance from "../api/axios";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   let Links = [
     { name: "ADD HALL", link: "/" },
@@ -15,8 +21,17 @@ const Header = () => {
 
   const handleLogout = async (e) => {
     e.preventDefault;
-    const access = getAccessToken();
-    console.log(access);
+    const refresh = getRefreshToken();
+
+    try {
+      const response = await axiosInstance.post("/logout/", {
+        refresh: refresh,
+      });
+      navigate("/");
+      clearTokens();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
