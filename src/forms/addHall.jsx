@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const AddHall = () => {
-  return (
-    <div>addHall</div>
-  )
-}
+  return <section></section>;
+};
 
-export default AddHall
+export default AddHall;

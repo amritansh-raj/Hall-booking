@@ -20,15 +20,17 @@ const Header = () => {
   };
 
   useEffect(() => {
-    const Profile = async () => {
+    const getProfile = async () => {
       try {
-        const response = await axiosInstance.get("/profile");
+        const response = await axiosInstance.get("/profile/");
         console.log(response.data);
       } catch (error) {
         console.log(error);
       }
     };
-  });
+
+    getProfile();
+  }, []);
 
   return (
     <header className="shadow-md w-full fixed top-0 left-0">

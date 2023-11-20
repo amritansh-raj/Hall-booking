@@ -1,8 +1,8 @@
 import axios from "axios";
-import { getRefreshToken } from "../storage/storage";
+import { getRefreshToken, setTokens } from "../storage/storage";
 
 const instance = axios.create({
-  baseURL: "http://10.42.0.182:8000/booking",
+  baseURL: "http://10.21.84.196:8000/booking",
   headers: { "Content-Type": "application/json" },
   withCredentials: true,
 });
@@ -30,8 +30,17 @@ instance.interceptors.response.use(
 
       try {
         const refreshToken = getRefreshToken();
-        const response = await instance.post("/refresh", { refreshToken });
+        const response = await instance.post("/refresh/", {
+          refresh: refreshToken,
+        });
         console.log(response.data);
+
+        const access = response.data.access;
+        const refresh = response.data.refresh;
+        setTokens(access, refresh);
+
+        originalRequest.headers.Authorization = `Bearer ${access}`;
+        return axios(originalRequest);
       } catch (error) {
         console.log(error);
       }
