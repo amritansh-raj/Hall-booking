@@ -7,13 +7,8 @@ const Header = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  let Links = [
-    { name: "ADD HALL", link: "/home/addHall" },
-    { name: "SERVICE", link: "/" },
-    { name: "ABOUT", link: "/" },
-    { name: "CONTACT", link: "/" },
-  ];
   let [open, setOpen] = useState(false);
+  const [navOptions, setNavOptions] = useState([]);
 
   const handleLogout = async (e) => {
     e.preventDefault;
@@ -30,18 +25,19 @@ const Header = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const getProfile = async () => {
-  //     try {
-  //       const response = await axiosInstance.get("/profile/");
-  //       console.log(response.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
+  useEffect(() => {
+    const getNavOptions = async () => {
+      try {
+        const response = await axiosInstance.get("/left_panel/");
+        console.log(response.data);
+        setNavOptions(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  //   getProfile();
-  // }, []);
+    getNavOptions();
+  }, []);
 
   return (
     <header className="shadow-md w-full top-0 left-0 z-10">
@@ -63,7 +59,7 @@ const Header = () => {
             open ? "top-12" : "top-[-490px]"
           }`}
         >
-          {Links.map((link, index) => (
+          {navOptions.map((link, index) => (
             <li key={index} className="md:ml-8 md:my-0 my-7 font-semibold">
               <Link
                 to={link.link}

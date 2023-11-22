@@ -36,6 +36,7 @@ export function Login() {
       return;
     }
 
+    navigate("/home");
     try {
       const response = await axiosInstance.post("/login/token/", formData);
       console.log(response.data);
@@ -44,7 +45,6 @@ export function Login() {
       const refresh = response.data.refresh;
       setTokens(access, refresh);
       resetForm();
-      navigate("/home");
     } catch (error) {
       console.error(error);
     }

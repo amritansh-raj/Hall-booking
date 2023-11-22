@@ -1,6 +1,5 @@
 import axios from "axios";
 import { getRefreshToken, setTokens } from "../storage/storage";
-import { useNavigate } from "react-router-dom";
 import { navigateToHome } from "../utils/navigateToHome";
 import { configureAxios } from "../utils/axiosConfig";
 
@@ -42,7 +41,7 @@ axiosInstance.interceptors.response.use(
         return axios(originalRequest);
       } catch (error) {
         console.log(error);
-        navigateToHome();
+        // navigateToHome();
       }
     }
 
