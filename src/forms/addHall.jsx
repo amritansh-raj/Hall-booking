@@ -24,23 +24,19 @@ const AddHall = () => {
     // const { name, value } = e.target;
     // const ImageValue = e.target.files[0];
     // console.log(ImageValue);
-    const formData = new FormData();
-    formData.append("image", e.target.files[0]);
-    console.log(formData);
-    setImage(formData);
-
+    // const formData = new FormData();
+    // formData.append("image", e.target.files[0]);
+    // console.log(formData);
+    setImage(e.target.files[0]);
+    console.log(image);
     // const updatedImages = [...inputValue.image];
     // updatedImages[index] = image;
   };
 
-  // const handleAddImageField = () => {
-  //   setInputValue({ ...inputValue, images: [...inputValue.images, ""] });
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(inputValue);
-    inputValue.image = image
+    inputValue.image = image;
 
     try {
       const response = await axiosInstance.post(

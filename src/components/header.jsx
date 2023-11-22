@@ -29,7 +29,6 @@ const Header = () => {
     const getNavOptions = async () => {
       try {
         const response = await axiosInstance.get("/left_panel/");
-        console.log(response.data);
         setNavOptions(response.data);
       } catch (error) {
         console.log(error);
@@ -62,7 +61,7 @@ const Header = () => {
           {navOptions.map((link, index) => (
             <li key={index} className="md:ml-8 md:my-0 my-7 font-semibold">
               <Link
-                to={link.link}
+                to={link.route}
                 className="text-gray-800 hover:text-blue-400 duration-500"
               >
                 {link.name}

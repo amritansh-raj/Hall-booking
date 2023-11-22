@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getRefreshToken, setTokens } from "../storage/storage";
 import { navigateToHome } from "../utils/navigateToHome";
-import { configureAxios } from "../utils/axiosConfig";
+import { BaseUrl, configureAxios } from "../utils/axiosConfig";
 
 const axiosInstance = axios.create(configureAxios());
 
@@ -22,8 +22,21 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
+    const errorResponse = error.response;
 
-    if (error.response.status === 401 && !originalRequest._retry) {
+    if (
+      error.response.status === 401 &&
+      originalRequest.url === BaseUrl + "/refresh/"
+    ) {
+      navigateToHome();
+      return Promise.reject(error);
+    }
+
+    if (
+      errorResponse.status === 401 &&
+      !originalRequest._retry &&
+      errorResponse.data.code === "token_not_valid"
+    ) {
       originalRequest._retry = true;
 
       try {
@@ -31,7 +44,6 @@ axiosInstance.interceptors.response.use(
         const response = await axiosInstance.post("/refresh/", {
           refresh: refreshToken,
         });
-        console.log(response.data);
 
         const access = response.data.access;
         const refresh = response.data.refresh;

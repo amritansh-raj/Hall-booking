@@ -1,7 +1,9 @@
 export const configureAxios = () => {
   return {
     baseURL: "http://10.21.66.92:8000/booking",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": undefined },
     withCredentials: true,
   };
 };
+
+export const BaseUrl = "http://10.21.66.92:8000/booking";
