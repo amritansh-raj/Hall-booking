@@ -3,6 +3,7 @@ import InputField from "../components/InputField";
 import axiosInstance from "../api/axios";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
+import { toast } from "react-toastify";
 
 const AddHall = () => {
   const initialInputValue = {
@@ -13,7 +14,7 @@ const AddHall = () => {
   };
 
   const [inputValue, setInputValue] = useState(initialInputValue);
-  const [image, setImage] = useState([]);
+  const [image, setImage] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,31 +22,34 @@ const AddHall = () => {
   };
 
   const handleImageChange = (e) => {
-    // const { name, value } = e.target;
-    // const ImageValue = e.target.files[0];
-    // console.log(ImageValue);
-    // const formData = new FormData();
-    // formData.append("image", e.target.files[0]);
-    // console.log(formData);
     setImage(e.target.files[0]);
-    console.log(image);
-    // const updatedImages = [...inputValue.image];
-    // updatedImages[index] = image;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(inputValue);
-    inputValue.image = image;
+    const requestData = new FormData();
+    requestData.append("name", inputValue.name);
+    requestData.append("description", inputValue.description);
+    requestData.append("occupancy", inputValue.occupancy);
+    requestData.append("booking_days", inputValue.booking_days);
+    requestData.append("image", image);
 
+    console.log(requestData);
     try {
       const response = await axiosInstance.post(
         "/conference_hall/",
-        inputValue
+        requestData
       );
-      console.log(response.data);
+      console.log(response);
+      if (response.status === 201) {
+        toast.success("Hall added");
+      }
     } catch (error) {
-      console.log(error);
+      const status = error.response.status;
+      if (status === 400) {
+        toast.error("Hall with this name already exists");
+      }
     }
   };
 

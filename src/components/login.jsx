@@ -4,8 +4,7 @@ import axiosInstance from "../api/axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { setTokens } from "../storage/storage";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export function Login() {
   const navigate = useNavigate();
@@ -44,17 +43,13 @@ export function Login() {
       const access = response.data.access;
       const refresh = response.data.refresh;
       setTokens(access, refresh);
-      showToastMessage();
+      toast.success("Logged in succesfully!!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
       resetForm();
     } catch (error) {
       console.error(error);
     }
-  };
-
-  const showToastMessage = () => {
-    toast.success("Success Notification !", {
-      position: toast.POSITION.TOP_RIGHT,
-    });
   };
 
   useEffect(() => {
@@ -77,18 +72,6 @@ export function Login() {
 
   return (
     <>
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
       <div className="h-screen bg-[#1a1c20] flex justify-center">
         <div className="container flex flex-row m-20 bg-[#e9e9e9] rounded-2xl">
           <div className="hidden lg:flex lg:flex-auto lg:w-64 lg:rounded-2xl lg:justify-center lg:items-center">
@@ -107,7 +90,6 @@ export function Login() {
                 alt="not found"
               />
             </div>
-            <button onClick={showToastMessage}>Notify</button>
             <div className="flex justify-center text-center text-black flex-col">
               <p className="mb-2 antialiased font-serif font-bold text-4xl">
                 Welcome Back!!

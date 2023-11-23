@@ -24,13 +24,13 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config;
     const errorResponse = error.response;
 
-    if (
-      error.response.status === 401 &&
-      originalRequest.url === BaseUrl + "/refresh/"
-    ) {
-      navigateToHome();
-      return Promise.reject(error);
-    }
+    // if (
+    //   error.response.status === 401 &&
+    //   originalRequest.url === BaseUrl + "/refresh/"
+    // ) {
+    //   navigateToHome();
+    //   return Promise.reject(error);
+    // }
 
     if (
       errorResponse.status === 401 &&

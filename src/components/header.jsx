@@ -2,13 +2,22 @@ import React, { useEffect, useState } from "react";
 import { clearTokens, getRefreshToken } from "../storage/storage";
 import axiosInstance from "../api/axios";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
+  let navOptions = [
+    { name: "ADD HALL", route: "/home/addHall" },
+    {
+      name: "BOOK",
+      route: "/home/book",
+    },
+  ];
+
   let [open, setOpen] = useState(false);
-  const [navOptions, setNavOptions] = useState([]);
+  // const [navOptions, setNavOptions] = useState([]);
 
   const handleLogout = async (e) => {
     e.preventDefault;
@@ -19,6 +28,9 @@ const Header = () => {
         refresh: refresh,
       });
       navigate("/");
+      toast.success("Logged out succesfully!!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
       clearTokens();
     } catch (error) {
       console.log(error);
