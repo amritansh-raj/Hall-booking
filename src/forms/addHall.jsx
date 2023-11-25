@@ -54,7 +54,7 @@ const AddHall = () => {
   };
 
   return (
-    <section>
+    <section className="m-4">
       <form onSubmit={handleSubmit}>
         <InputField
           label="Name"
@@ -72,6 +72,7 @@ const AddHall = () => {
           type="text"
           onChange={handleInputChange}
           multiline
+          rows={4}
           required
         />
 
@@ -94,7 +95,6 @@ const AddHall = () => {
         />
 
         <InputField
-          label="Images"
           name="image"
           type="file"
           onChange={handleImageChange}

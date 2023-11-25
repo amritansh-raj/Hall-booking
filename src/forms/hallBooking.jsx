@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import axiosInstance from "../api/axios";
+import { Select } from "@mui/material";
 
 const AddConferenceForm = () => {
   const initialFormValues = {
@@ -17,6 +18,7 @@ const AddConferenceForm = () => {
   };
 
   const [formValues, setFormValues] = useState(initialFormValues);
+  const [halls, setHalls] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,9 +37,22 @@ const AddConferenceForm = () => {
     }
   };
 
+  useEffect(() => {
+    const getHalls = async () => {
+      try {
+        const response = await axiosInstance.get("drop_conf_hall");
+        setHalls(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getHalls();
+    console.log(halls);
+  }, []);
+
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="m-4">
         <TextField
           label="From Date"
           type="date"
@@ -45,7 +60,8 @@ const AddConferenceForm = () => {
           value={formValues.fromDate}
           onChange={handleChange}
           required
-        />
+        />{" "}
+        <br />
         <TextField
           label="From Time"
           type="time"
@@ -53,7 +69,8 @@ const AddConferenceForm = () => {
           value={formValues.fromTime}
           onChange={handleChange}
           required
-        />
+        />{" "}
+        <br />
         <TextField
           label="To Date"
           type="date"
@@ -61,7 +78,8 @@ const AddConferenceForm = () => {
           value={formValues.toDate}
           onChange={handleChange}
           required
-        />
+        />{" "}
+        <br />
         <TextField
           label="To Time"
           type="time"
@@ -69,7 +87,8 @@ const AddConferenceForm = () => {
           value={formValues.toTime}
           onChange={handleChange}
           required
-        />
+        />{" "}
+        <br />
         <TextField
           label="Participants Count"
           type="number"
@@ -77,8 +96,9 @@ const AddConferenceForm = () => {
           value={formValues.participantsCount}
           onChange={handleChange}
           required
-        />
-        <TextField
+        />{" "}
+        <br />
+        <Select
           label="Hall Name"
           name="hallName"
           select
@@ -86,9 +106,11 @@ const AddConferenceForm = () => {
           onChange={handleChange}
           required
         >
-          <MenuItem value="hall1">Hall 1</MenuItem>
-          <MenuItem value="hall2">Hall 2</MenuItem>
-        </TextField>
+          {halls.map((hall, index) => {
+            <MenuItem value={hall.id}>{hall.name}</MenuItem>;
+          })}
+        </Select>
+        <br />
         <TextField
           label="Purpose"
           name="purpose"
@@ -97,7 +119,8 @@ const AddConferenceForm = () => {
           value={formValues.purpose}
           onChange={handleChange}
           required
-        />
+        />{" "}
+        <br />
         <TextField
           label="Remark"
           name="remark"

@@ -9,9 +9,10 @@ const InputField = ({
   onChange,
   multiline,
   onAddClick,
+  rows
 }) => {
   return (
-    <div className="form-group">
+    <div className="form-group m-2">
       <TextField
         id={name}
         type={type}
@@ -21,14 +22,15 @@ const InputField = ({
         label={label}
         variant="outlined"
         multiline={multiline}
+        rows={rows}
         fullWidth
         required
       />
-      {type === "file" && (
+      {/* {type === "file" && (
         <Button variant="contained" onClick={onAddClick}>
           +
         </Button>
-      )}
+      )} */}
     </div>
   );
 };

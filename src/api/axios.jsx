@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getRefreshToken, setTokens } from "../storage/storage";
 import { navigateToHome } from "../utils/navigateToHome";
-import { BaseUrl, configureAxios } from "../utils/axiosConfig";
+import { configureAxios } from "../utils/axiosConfig";
 
 const axiosInstance = axios.create(configureAxios());
 
@@ -31,7 +31,7 @@ axiosInstance.interceptors.response.use(
     //   navigateToHome();
     //   return Promise.reject(error);
     // }
-
+    // console.log(originalRequest);
     if (
       errorResponse.status === 401 &&
       !originalRequest._retry &&
@@ -41,6 +41,7 @@ axiosInstance.interceptors.response.use(
 
       try {
         const refreshToken = getRefreshToken();
+
         const response = await axiosInstance.post("/refresh/", {
           refresh: refreshToken,
         });
@@ -53,7 +54,6 @@ axiosInstance.interceptors.response.use(
         return axios(originalRequest);
       } catch (error) {
         console.log(error);
-        // navigateToHome();
       }
     }
 
